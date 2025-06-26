@@ -1,5 +1,29 @@
 # Changelog
 
+## [0.2.0] - 2025-06-27
+
+### Added
+- **Hindu Calendar (Panchanga) Support**: Complete traditional Hindu calendar functionality
+- `HinduCalendarWidget` with both compact and full display modes
+- Complete Panchanga calculations (Tithi, Vara, Nakshatra, Yoga, Karana)
+- Astronomical calculations (Sun and Moon longitudes, Julian day)
+- Hindu year, lunar month, and paksha calculations
+- Seasonal (Ritu) information and traditional Sanskrit names
+- Location-aware calculations (latitude/longitude support)
+- Enhanced demo application showing both Myanmar and Hindu calendars in tabbed interface
+
+### Enhanced
+- Updated package description to reflect dual calendar support
+- Improved documentation with comprehensive usage examples
+- Enhanced example application with better organization and tabbed interface
+- Added comprehensive Hindu calendar usage examples to README
+
+### Technical Improvements
+- Robust calculation engines for both calendar systems
+- Proper data mapping between calculation engines and widget displays
+- Enhanced visual design with color-coded sections and better typography
+- Comprehensive error handling and input validation
+
 ## [0.1.0] - 2025-06-27
 
 ### Added

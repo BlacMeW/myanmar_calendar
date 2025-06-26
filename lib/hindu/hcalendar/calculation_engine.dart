@@ -137,6 +137,10 @@ class HinduCalculationEngine {
     int hinduYear = year + 57; // Rough approximation
 
     return {
+      'gregorianYear': year,
+      'gregorianMonth': month,
+      'gregorianDay': day,
+      'julianDay': julianDay,
       'hinduYear': hinduYear,
       'hinduMonth': hinduMonth,
       'hinduDay': pakshaDay,
