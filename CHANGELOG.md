@@ -1,5 +1,36 @@
 # Changelog
 
+## [0.1.0] - 2025-06-27
+
+### Added
+- Complete Myanmar calendar functionality with date conversion
+- `MyanmarCalendarWidget` with both compact and full display modes
+- `MyanmarCalendarConverter` for Gregorian to Myanmar date conversion
+- Support for traditional Myanmar calendar calculations including Watat years
+- Myanmar day names and month names
+- Comprehensive demo application showing all features
+- Full API documentation and usage examples
+- Widget customization options (font size, display mode)
+
+### Features
+- **Calendar Widget**: Beautiful Myanmar calendar display with customizable layouts
+- **Date Conversion**: Accurate conversion between Gregorian and Myanmar calendars
+- **Watat Year Support**: Proper handling of intercalary years in Myanmar calendar
+- **Traditional Names**: Support for Myanmar month and day names
+- **Easy Integration**: Simple API for Flutter applications
+
+### Documentation
+- Complete README with usage examples
+- API reference documentation
+- Demo application with comprehensive examples
+- Installation and setup instructions
+
+### Technical Details
+- Based on traditional Myanmar calendar algorithms
+- Support for dates from 1900 to 2100
+- Efficient calculation methods
+- Flutter-optimized widgets with proper state management
+
 ## [0.0.2] - 2025-06-26
 
 ### Fixed

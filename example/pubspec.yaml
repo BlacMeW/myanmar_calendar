@@ -1,6 +1,7 @@
 name: myanmar_calendar_example
 description: "Example app demonstrating Myanmar Calendar library usage"
 version: 1.0.0+1
+publish_to: none
 
 environment:
   sdk: ^3.8.1
