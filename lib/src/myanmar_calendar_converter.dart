@@ -196,4 +196,18 @@ class MyanmarCalendarConverter {
 
     return holidays;
   }
+
+  /// Convert Myanmar date to Gregorian date using integer inputs
+  /// Returns formatted date string "YYYY-MM-DD"
+  static String myanmarIntsToGregorian(int myYear, int myMonth, int myDay) {
+    MyanmarDate myanmarDate = MyanmarDate(year: myYear, month: myMonth, day: myDay);
+    return myanmarToGregorianString(myanmarDate, format: 'yyyy-MM-dd');
+  }
+
+  /// Convert Myanmar date to Gregorian with readable month names using integer inputs
+  /// Returns formatted date string "Day Month Year"
+  static String myanmarIntsToGregorianFull(int myYear, int myMonth, int myDay) {
+    MyanmarDate myanmarDate = MyanmarDate(year: myYear, month: myMonth, day: myDay);
+    return myanmarToGregorianString(myanmarDate, format: 'full');
+  }
 }

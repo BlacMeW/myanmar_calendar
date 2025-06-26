@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:myanmar_calendar/myanmar_calendar.dart';
+import 'package:myanmar_calendar_widget/myanmar_calendar.dart';
 
 void main() {
   group('Myanmar Calendar Core Tests', () {

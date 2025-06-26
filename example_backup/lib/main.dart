@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myanmar_calendar/myanmar_calendar.dart';
+import 'package:myanmar_calendar_widget/myanmar_calendar.dart';
 
 void main() {
   runApp(const MyanmarCalendarExampleApp());

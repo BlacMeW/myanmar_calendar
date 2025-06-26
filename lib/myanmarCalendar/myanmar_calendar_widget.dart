@@ -60,7 +60,7 @@ class _MyanmarCalendarWidgetState extends State<MyanmarCalendarWidget> {
   Widget build(BuildContext context) {
     final julianDay = modernDateToJulianDay(widget.year, widget.month, widget.day);
     final myanmarDate = _MyanmarCalendarWidgetState.j2m(julianDay);
-    final int myt = myanmarDate[0];
+    // final int myt = myanmarDate[0]; // Myanmar year type (not displayed in basic widget)
     final int my = myanmarDate[1];
     final int mm = myanmarDate[2];
     final int md = myanmarDate[3];
@@ -247,13 +247,9 @@ class _MyanmarCalendarWidgetState extends State<MyanmarCalendarWidget> {
     }
 
     // --- Full convertor UI ---
-    String myanmarYearDisplay = _toMyanmarNumber(my);
-    if (myt == 1) {
-      myanmarYearDisplay += ' (ငယ်)';
-    } else if (myt == 2) {
-      myanmarYearDisplay += ' (ကြီး)';
-    }
-
+    // Note: Myanmar year type information available in myt variable
+    // (1 = small year, 2 = big year)
+    
     return Card(
       elevation: 4.0,
       margin: const EdgeInsets.symmetric(vertical: 12),
@@ -548,7 +544,7 @@ class _MyanmarCalendarWidgetState extends State<MyanmarCalendarWidget> {
             final myanmarDate = _MyanmarCalendarWidgetState.j2m(
               modernDateToJulianDay(_gregorianYear, _gregorianMonth, _gregorianDay),
             );
-            final int myt = myanmarDate[0];
+            // final int myt = myanmarDate[0]; // Myanmar year type (unused in this context)
             final int my = myanmarDate[1];
             final int mm = myanmarDate[2];
             final int md = myanmarDate[3];
@@ -659,8 +655,8 @@ class _MyanmarCalendarWidgetState extends State<MyanmarCalendarWidget> {
     var mytTg1FmWerr = cal_my(my);
     int myt = mytTg1FmWerr[0];
     int tg1 = mytTg1FmWerr[1];
-    int fm = mytTg1FmWerr[2];
-    int werr = mytTg1FmWerr[3];
+    // int fm = mytTg1FmWerr[2]; // Full moon day (unused in this calculation)
+    // int werr = mytTg1FmWerr[3]; // Watat error (unused in this calculation)
 
     int dd = jdn - tg1 + 1;
     int b = (myt / 2).floor();
@@ -751,8 +747,8 @@ class _MyanmarCalendarWidgetState extends State<MyanmarCalendarWidget> {
 
   /// Convert Myanmar date to Julian Day Number
   static int myanmarToJdn(int myYear, int myMonth, int myDay) {
-    double SY = 1577917828.0 / 4320000.0;
-    double MO = 1954168.050623;
+    // double SY = 1577917828.0 / 4320000.0; // Solar year (unused)
+    // double MO = 1954168.050623; // Mean lunar month (unused)
     var mytTg1FmWerr = cal_my(myYear);
     int myt = mytTg1FmWerr[0];
     int tg1 = mytTg1FmWerr[1];
@@ -778,41 +774,4 @@ class _MyanmarCalendarWidgetState extends State<MyanmarCalendarWidget> {
     return tg1 + dd - 1;
   }
 
-  /// Convert Myanmar date to Gregorian date
-  /// Returns formatted date string "YYYY-MM-DD"
-  static String myanmarToGregorian(int myYear, int myMonth, int myDay) {
-    int jdn = myanmarToJdn(myYear, myMonth, myDay);
-    var gregorian = jdnToGregorian(jdn.toDouble());
-    int year = gregorian[0];
-    int month = gregorian[1];
-    int day = gregorian[2];
-    return '$year-${month.toString().padLeft(2, '0')}-${day.toString().padLeft(2, '0')}';
-  }
-
-  /// Convert Myanmar date to Gregorian with readable month names
-  /// Returns formatted date string "Day Month Year"
-  static String myanmarToGregorianFull(int myYear, int myMonth, int myDay) {
-    int jdn = myanmarToJdn(myYear, myMonth, myDay);
-    var gregorian = jdnToGregorian(jdn.toDouble());
-    int year = gregorian[0];
-    int month = gregorian[1];
-    int day = gregorian[2];
-
-    final monthNames = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December',
-    ];
-
-    return '$day ${monthNames[month - 1]} $year';
-  }
 }

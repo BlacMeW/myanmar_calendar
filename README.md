@@ -21,7 +21,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  myanmar_calendar: ^0.0.1
+  myanmar_calendar_widget: ^0.0.1
 ```
 
 Then run:
@@ -35,7 +35,7 @@ flutter pub get
 ### Basic Import
 
 ```dart
-import 'package:myanmar_calendar/myanmar_calendar.dart';
+import 'package:myanmar_calendar_widget/myanmar_calendar.dart';
 ```
 
 ### Date Conversion
@@ -175,9 +175,92 @@ The Myanmar calendar is a lunisolar calendar system that has been used in Myanma
 
 In watat years, there may be additional intercalary months.
 
-## Example App
+## Example
 
-Check out the example app in the `/example` directory for a complete demonstration of the library features.
+Here's a complete example showing how to use the Myanmar Calendar Widget in your Flutter app:
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:myanmar_calendar_widget/myanmar_calendar.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Myanmar Calendar Demo',
+      theme: ThemeData(primarySwatch: Colors.orange),
+      home: const MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  DateTime selectedDate = DateTime.now();
+
+  @override
+  Widget build(BuildContext context) {
+    // Get today's Myanmar date
+    MyanmarDate myanmarToday = MyanmarCalendarConverter.getMyanmarToday();
+    
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Myanmar Calendar Demo'),
+        backgroundColor: Colors.orange,
+      ),
+      body: Column(
+        children: [
+          // Display today's Myanmar date
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  const Text('Today in Myanmar Calendar:'),
+                  Text(
+                    myanmarToday.fullDateString,
+                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          
+          // Myanmar Calendar Widget
+          MyanmarCalendarWidget(
+            year: selectedDate.year,
+            month: selectedDate.month,
+            day: selectedDate.day,
+            compact: false,
+          ),
+          
+          // Compact version
+          const Text('Compact Version:'),
+          MyanmarCalendarWidget(
+            year: selectedDate.year,
+            month: selectedDate.month,
+            day: selectedDate.day,
+            compact: true,
+            fontSize: 16,
+          ),
+        ],
+      ),
+    );
+  }
+}
+```
 
 ## Contributing
 

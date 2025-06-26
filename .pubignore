@@ -1,0 +1,27 @@
+# IDE files
+.idea/
+.vscode/
+*.iml
+
+# Build outputs
+build/
+.dart_tool/
+
+# Git
+.git/
+.gitignore
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+
+# Example app dependencies (since example uses path dependency during development)
+example/pubspec.lock
+example/.dart_tool/
+example/build/
+
+# Test coverage
+coverage/
