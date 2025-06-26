@@ -1,6 +1,6 @@
 name: myanmar_calendar_widget
 description: "A comprehensive Myanmar calendar library for Flutter with date conversion, calendar widgets, and traditional Myanmar calendar support."
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/BlacMeW/myanmar_calendar
 repository: https://github.com/BlacMeW/myanmar_calendar
 issue_tracker: https://github.com/BlacMeW/myanmar_calendar/issues
