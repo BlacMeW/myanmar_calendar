@@ -102,39 +102,71 @@ class _MyanmarCalendarWidgetState extends State<MyanmarCalendarWidget> {
       final double yearFontSize = widget.fontSize ?? 20;
       final double monthFontSize = (widget.fontSize != null) ? widget.fontSize! - 2 : 18;
       final double dayFontSize = widget.fontSize ?? 20;
-      return Card(
-        elevation: 2.0,
-        margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                _toMyanmarNumber(my),
-                style: TextStyle(
-                  fontSize: yearFontSize,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'MyanmarSans',
-                  color: Colors.deepOrange,
-                ),
-              ),
-              const SizedBox(width: 12),
-              Text(
-                myanmarMonth,
-                style: TextStyle(fontSize: monthFontSize, fontWeight: FontWeight.w600),
-              ),
-              const SizedBox(width: 12),
-              Text(
-                '${_toMyanmarNumber(displayMd)} ရက်',
-                style: TextStyle(
-                  fontSize: dayFontSize,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'MyanmarSans',
-                  color: Colors.deepOrange,
-                ),
-              ),
-            ],
+      return GestureDetector(
+        onTap: () {
+          setState(() {
+            _isMyanmarToGregorian = !_isMyanmarToGregorian;
+          });
+        },
+        child: Card(
+          elevation: 2.0,
+          margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: _isMyanmarToGregorian
+                  ? [
+                      Text(
+                        _toMyanmarNumber(my),
+                        style: TextStyle(
+                          fontSize: yearFontSize,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'MyanmarSans',
+                          color: Colors.deepOrange,
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Text(
+                        myanmarMonth,
+                        style: TextStyle(fontSize: monthFontSize, fontWeight: FontWeight.w600),
+                      ),
+                      const SizedBox(width: 12),
+                      Text(
+                        '${_toMyanmarNumber(displayMd)} ရက်',
+                        style: TextStyle(
+                          fontSize: dayFontSize,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'MyanmarSans',
+                          color: Colors.deepOrange,
+                        ),
+                      ),
+                    ]
+                  : [
+                      Text(
+                        widget.year.toString().padLeft(4, '0'),
+                        style: TextStyle(
+                          fontSize: yearFontSize,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.deepOrange,
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Text(
+                        _gregorianMonthName(widget.month),
+                        style: TextStyle(fontSize: monthFontSize, fontWeight: FontWeight.w600),
+                      ),
+                      const SizedBox(width: 12),
+                      Text(
+                        widget.day.toString().padLeft(2, '0'),
+                        style: TextStyle(
+                          fontSize: dayFontSize,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.deepOrange,
+                        ),
+                      ),
+                    ],
+            ),
           ),
         ),
       );
