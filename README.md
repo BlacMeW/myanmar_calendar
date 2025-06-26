@@ -276,7 +276,7 @@ class CalendarDemo extends StatelessWidget {
           children: [
             Text('Myanmar Calendar', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             SizedBox(height: 8),
-            
+
             // Myanmar Calendar - Full Mode
             MyanmarCalendarWidget(
               year: 2025,
@@ -284,9 +284,9 @@ class CalendarDemo extends StatelessWidget {
               day: 27,
               compact: false,
             ),
-            
+
             SizedBox(height: 16),
-            
+
             // Myanmar Calendar - Compact Mode
             MyanmarCalendarWidget(
               year: 2025,
@@ -294,12 +294,12 @@ class CalendarDemo extends StatelessWidget {
               day: 27,
               compact: true,
             ),
-            
+
             SizedBox(height: 24),
-            
+
             Text('Hindu Calendar (Panchanga)', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             SizedBox(height: 8),
-            
+
             // Hindu Calendar - Full Mode
             HinduCalendarWidget(
               year: 2025,
@@ -309,9 +309,9 @@ class CalendarDemo extends StatelessWidget {
               latitude: 28.6139, // New Delhi coordinates
               longitude: 77.2090,
             ),
-            
+
             SizedBox(height: 16),
-            
+
             // Hindu Calendar - Compact Mode
             HinduCalendarWidget(
               year: 2025,
