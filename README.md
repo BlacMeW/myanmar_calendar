@@ -214,7 +214,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     // Get today's Myanmar date
     MyanmarDate myanmarToday = MyanmarCalendarConverter.getMyanmarToday();
-    
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Myanmar Calendar Demo'),
@@ -237,7 +237,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
           ),
-          
+
           // Myanmar Calendar Widget
           MyanmarCalendarWidget(
             year: selectedDate.year,
@@ -245,7 +245,7 @@ class _MyHomePageState extends State<MyHomePage> {
             day: selectedDate.day,
             compact: false,
           ),
-          
+
           // Compact version
           const Text('Compact Version:'),
           MyanmarCalendarWidget(

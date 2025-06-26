@@ -249,7 +249,7 @@ class _MyanmarCalendarWidgetState extends State<MyanmarCalendarWidget> {
     // --- Full convertor UI ---
     // Note: Myanmar year type information available in myt variable
     // (1 = small year, 2 = big year)
-    
+
     return Card(
       elevation: 4.0,
       margin: const EdgeInsets.symmetric(vertical: 12),
@@ -773,5 +773,4 @@ class _MyanmarCalendarWidgetState extends State<MyanmarCalendarWidget> {
 
     return tg1 + dd - 1;
   }
-
 }
