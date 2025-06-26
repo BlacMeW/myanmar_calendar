@@ -1,5 +1,5 @@
 /// Mathematical utility functions for Hindu calendar calculations
-/// 
+///
 /// This file contains basic mathematical functions required for
 /// astronomical calculations in the Hindu calendar system.
 

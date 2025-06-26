@@ -145,7 +145,10 @@ class _CalendarHomePageState extends State<CalendarHomePage> {
             const SizedBox(height: 24),
 
             // Usage Information
-            const Text('Usage in Code', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            const Text(
+              'Usage in Code',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 12),
             Card(
               color: Colors.grey.shade100,
