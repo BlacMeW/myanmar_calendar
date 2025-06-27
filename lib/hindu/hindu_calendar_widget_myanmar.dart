@@ -1151,18 +1151,18 @@ class _HinduCalendarWidgetMyanmarState extends State<HinduCalendarWidgetMyanmar>
 
   String _getMyanmarMonth(String month) {
     const Map<String, String> monthTranslations = {
-      'Chaitra': 'စိတြ (မတ်-ဧပြီ)',
+      'Caitra': 'စိတြ (မတ်-ဧပြီ)',
       'Vaisakha': 'ဝိသာခ (ဧပြီ-မေ)',
       'Jyaistha': 'ဇေဋ္ဌ (မေ-ဇွန်)',
-      'Ashadha': 'အာသဠှ (ဇွန်-ဇူလိုင်)',
-      'Shravana': 'သရဝဏ်(ဇူလိုင်-သြဂုတ်)',
+      'Asadha': 'အာသဠှ (ဇွန်-ဇူလိုင်)',
+      'Sravana': 'သရဝဏ်(ဇူလိုင်-သြဂုတ်)',
       'Bhadrapada': 'ဘဒြ (သြဂုတ်-စက်တင်ဘာ)',
-      'Ashvina': 'အဿဝဏီ (စက်တင်ဘာ-အောက်တိုဘာ)',
+      'Asvina': 'အဿဝဏီ (စက်တင်ဘာ-အောက်တိုဘာ)',
       'Kartika': 'ကြတ္တိကာ (အောက်တိုဘာ-နိုဝင်ဘာ)',
-      'Agrahayana': 'အဒြ (နိုဝင်ဘာ-ဒီဇင်ဘာ)',
-      'Pausha': 'ဖုသျှ (ဒီဇင်ဘာ-ဇန်နဝါရီ)',
+      'Margasirsa': 'မြဂသိရ် (နိုဝင်ဘာ-ဒီဇင်ဘာ)',
+      'Pausa': 'ဖုသျှ (ဒီဇင်ဘာ-ဇန်နဝါရီ)',
       'Magha': 'မာဃ (ဇန်နဝါရီ-ဖေဖော်ဝါရီ)',
-      'Phalguna': 'ဘရဂုဏ္ဏီ (ဖေဖော်ဝါရီ-မတ်)',
+      'Phalguna': 'ဖဂ္ဂုန် (ဖေဖော်ဝါရီ-မတ်)',
     };
     return monthTranslations[month] ?? month;
   }

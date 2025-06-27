@@ -1,6 +1,6 @@
 name: myanmar_calendar_widget
 description: "A comprehensive calendar library for Flutter featuring Myanmar and Hindu (Panchanga) calendar widgets with date conversion, compact and full display modes, astronomical calculations, and traditional calendar support."
-version: 0.3.0
+version: 0.3.1
 homepage: https://github.com/BlacMeW/myanmar_calendar
 repository: https://github.com/BlacMeW/myanmar_calendar
 issue_tracker: https://github.com/BlacMeW/myanmar_calendar/issues

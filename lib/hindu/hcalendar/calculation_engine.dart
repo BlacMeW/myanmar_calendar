@@ -170,6 +170,9 @@ class HinduCalculationEngine {
     int weekday = getWeekday(julianDay);
     int hinduMonth = getHinduMonth(sunLong);
 
+    // For solar month (masa), use the sun's position directly
+    int solarMonth = ((sunLong / 30.0).floor() + 1).clamp(1, 12);
+
     // Determine paksha (lunar fortnight)
     bool isShukla = tithiNum <= 15;
     int pakshaDay = isShukla ? tithiNum : tithiNum - 15;
@@ -190,6 +193,7 @@ class HinduCalculationEngine {
       'hinduMonth': hinduMonth,
       'hinduDay': pakshaDay,
       'monthName': getMonthName(hinduMonth),
+      'masaName': getMonthName(solarMonth), // Use separate solar month
       'tithi': pakshaDay,
       'tithiName': getTithiName(pakshaDay),
       'paksha': getPakshaName(isShukla),
@@ -201,7 +205,7 @@ class HinduCalculationEngine {
       'karanaName': getKaranaName(karana),
       'weekday': weekday,
       'weekdayName': getWeekdayName(weekday),
-      'ritu': getRituName(hinduMonth),
+      'ritu': getRituName(solarMonth), // Use solar month for ritu calculation
       'sunLongitude': sunLong,
       'moonLongitude': moonLong,
       'tithiValue': tithiValue,

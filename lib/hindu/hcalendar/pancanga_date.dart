@@ -133,7 +133,7 @@ class PancangaDate {
       varaNumber: calculation['weekday'] ?? 0,
       varaName: calculation['weekdayName'] ?? '',
       rituName: calculation['ritu'] ?? '',
-      masaName: calculation['monthName'] ?? '',
+      masaName: calculation['masaName'] ?? '',
       hinduYear: calculation['hinduYear'] ?? 0,
       julianDay: calculation['julianDay'] ?? 0.0,
       sunLongitude: calculation['sunLongitude'] ?? 0.0,

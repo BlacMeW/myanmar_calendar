@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1] - 2025-06-28
+
+### Fixed
+- Fixed a critical issue in the Hindu calendar widget where lunar month and solar month (masa) were incorrectly showing the same value
+- Updated month name translations to match the standard Sanskrit names used in the calculation engine
+- Improved translation of "Phalguna" month in Myanmar language version
+
 ## [0.3.0] - 2025-06-27
 
 ### Added
