@@ -9,7 +9,7 @@
 
 ### Fixed
 - Fixed weekday translation issue where English names weren't being translated correctly
-- Fixed translation of "Friday" to properly show as "သောကြာနေ့" instead of just showing English text 
+- Fixed translation of "Friday" to properly show as "သောကြာနေ့" instead of just showing English text
 
 ## [0.2.0] - 2025-06-27
 
