@@ -35,6 +35,17 @@ class HinduCalendarWidgetMyanmar extends StatefulWidget {
   /// Whether to show converter interface
   final bool showConverter;
 
+  /// Day names in Myanmar
+  static const List<String> dayNames = [
+    'တနင်္ဂနွေ', // Sunday
+    'တနင်္လာ', // Monday
+    'အင်္ဂါ', // Tuesday
+    'ဗုဒ္ဓဟူး', // Wednesday
+    'ကြာသပတေး', // Thursday
+    'သောကြာ', // Friday
+    'စနေ', // Saturday
+  ];
+
   const HinduCalendarWidgetMyanmar({
     super.key,
     required this.year,
@@ -945,7 +956,7 @@ class _HinduCalendarWidgetMyanmarState extends State<HinduCalendarWidgetMyanmar>
       'Abhijit': 'ဝိဿောဒေဝါ',
       'Brahma': 'အဘိဇိတ်',
       'Kunda': 'ဗြဟ္မာ',
-      'Indragni': 'ကုန္ဒြ',
+      'Indragni': 'ကုန်ဒြ',
       'Rakshasa': 'ဣန္ဒာဂ္နိ',
       'Varuna': 'ရက္ခသ',
       'Aryama': 'ဝရုဏ',
