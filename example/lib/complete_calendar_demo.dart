@@ -40,7 +40,7 @@ class _CalendarHomePageState extends State<CalendarHomePage> with SingleTickerPr
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this);
+    _tabController = TabController(length: 3, vsync: this);
     _convertDate();
   }
 
@@ -82,9 +82,11 @@ class _CalendarHomePageState extends State<CalendarHomePage> with SingleTickerPr
           controller: _tabController,
           labelColor: Colors.white,
           unselectedLabelColor: Colors.white70,
+          isScrollable: true,
           tabs: const [
             Tab(text: 'Myanmar Calendar'),
             Tab(text: 'Hindu Calendar'),
+            Tab(text: 'Hindu Calendar (မြန်မာ)'),
           ],
         ),
       ),
@@ -101,7 +103,11 @@ class _CalendarHomePageState extends State<CalendarHomePage> with SingleTickerPr
           Expanded(
             child: TabBarView(
               controller: _tabController,
-              children: [_buildMyanmarCalendarTab(), _buildHinduCalendarTab()],
+              children: [
+                _buildMyanmarCalendarTab(),
+                _buildHinduCalendarTab(),
+                _buildHinduCalendarMyanmarTab(),
+              ],
             ),
           ),
         ],
@@ -297,6 +303,95 @@ class _CalendarHomePageState extends State<CalendarHomePage> with SingleTickerPr
   compact: false,
 )""", style: TextStyle(color: Colors.white, fontFamily: 'monospace')),
                   ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Hindu Calendar Tab (Myanmar Language)
+  Widget _buildHinduCalendarMyanmarTab() {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Full Hindu Calendar Widget in Myanmar
+          const Text(
+            'Hindu Calendar - Full Version (Myanmar Language)',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 12),
+          HinduCalendarWidgetMyanmar(
+            year: selectedDate.year,
+            month: selectedDate.month,
+            day: selectedDate.day,
+            compact: false,
+          ),
+
+          const SizedBox(height: 24),
+
+          // Compact Hindu Calendar Widget in Myanmar
+          const Text(
+            'Hindu Calendar - Compact Version (Myanmar Language)',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 12),
+          HinduCalendarWidgetMyanmar(
+            year: selectedDate.year,
+            month: selectedDate.month,
+            day: selectedDate.day,
+            compact: true,
+          ),
+
+          const SizedBox(height: 24),
+
+          // Usage Information
+          const Text(
+            'Hindu Calendar Usage (Myanmar Language)',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 12),
+          Card(
+            color: Colors.grey.shade100,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Import:', style: TextStyle(fontWeight: FontWeight.bold)),
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(8.0),
+                    color: Colors.black87,
+                    child: const Text(
+                      "import 'package:myanmar_calendar_widget/myanmar_calendar.dart';",
+                      style: TextStyle(color: Colors.white, fontFamily: 'monospace'),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  const Text('Basic Usage:', style: TextStyle(fontWeight: FontWeight.bold)),
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(8.0),
+                    color: Colors.black87,
+                    child: const Text("""HinduCalendarWidgetMyanmar(
+  year: 2025,
+  month: 6,
+  day: 27,
+  compact: false,
+)""", style: TextStyle(color: Colors.white, fontFamily: 'monospace')),
+                  ),
+                  const SizedBox(height: 16),
+                  const Text('Features:', style: TextStyle(fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 8),
+                  const Text('• All Panchanga elements in Myanmar language'),
+                  const Text('• Complete astronomical data'),
+                  const Text('• Traditional Hindu calendar information'),
+                  const Text('• Myanmar script and terminology'),
                 ],
               ),
             ),

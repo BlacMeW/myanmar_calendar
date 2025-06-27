@@ -72,6 +72,18 @@ class PancangaDate {
   /// Moon's longitude in degrees
   final double moonLongitude;
 
+  /// Muhurta index (1-15)
+  final int muhurtaIndex;
+
+  /// Muhurta name
+  final String muhurtaName;
+
+  /// Whether the muhurta is during day time
+  final bool muhurtaIsDay;
+
+  /// Muhurta period (Day/Night)
+  final String muhurtaPeriod;
+
   const PancangaDate({
     required this.gregorianYear,
     required this.gregorianMonth,
@@ -95,6 +107,10 @@ class PancangaDate {
     required this.julianDay,
     required this.sunLongitude,
     required this.moonLongitude,
+    required this.muhurtaIndex,
+    required this.muhurtaName,
+    required this.muhurtaIsDay,
+    required this.muhurtaPeriod,
   });
 
   /// Create a PancangaDate from calculation results
@@ -122,6 +138,10 @@ class PancangaDate {
       julianDay: calculation['julianDay'] ?? 0.0,
       sunLongitude: calculation['sunLongitude'] ?? 0.0,
       moonLongitude: calculation['moonLongitude'] ?? 0.0,
+      muhurtaIndex: calculation['muhurtaIndex'] ?? 1,
+      muhurtaName: calculation['muhurtaName'] ?? '',
+      muhurtaIsDay: calculation['muhurtaIsDay'] ?? true,
+      muhurtaPeriod: calculation['muhurtaPeriod'] ?? 'Day',
     );
   }
 
@@ -163,6 +183,10 @@ $varaName, $rituName, $masaName''';
       'julianDay': julianDay,
       'sunLongitude': sunLongitude,
       'moonLongitude': moonLongitude,
+      'muhurtaIndex': muhurtaIndex,
+      'muhurtaName': muhurtaName,
+      'muhurtaIsDay': muhurtaIsDay,
+      'muhurtaPeriod': muhurtaPeriod,
     };
   }
 

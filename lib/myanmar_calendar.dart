@@ -9,6 +9,7 @@ export 'hindu/hcalendar/name_functions.dart';
 export 'hindu/hcalendar/pancanga_date.dart';
 // Hindu Calendar exports
 export 'hindu/hindu_calendar_widget.dart';
+export 'hindu/hindu_calendar_widget_myanmar.dart';
 // Myanmar Calendar exports
 export 'myanmarCalendar/myanmar_calendar_widget.dart';
 export 'src/myanmar_calendar_converter.dart';

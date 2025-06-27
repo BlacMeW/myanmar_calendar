@@ -106,6 +106,47 @@ class HinduCalculationEngine {
     return ((sunLong / 30.0).floor() + 1).clamp(1, 12);
   }
 
+  /// Calculate current Muhurta (48-minute periods) for a given time
+  static Map<String, dynamic> getMuhurta(DateTime dateTime) {
+    // Convert to local time for accurate Muhurta calculation
+    int hour = dateTime.hour;
+    int minute = dateTime.minute;
+
+    // Calculate total minutes from midnight
+    int totalMinutes = hour * 60 + minute;
+
+    // Determine if it's day or night
+    // Simplified: 6 AM to 6 PM is day (12 hours = 15 muhurtas)
+    // 6 PM to 6 AM is night (12 hours = 15 muhurtas)
+    bool isDay = hour >= 6 && hour < 18;
+
+    if (isDay) {
+      // Day muhurtas (6 AM to 6 PM)
+      int dayMuhurtaIndex = ((totalMinutes - 360) / 48).floor().clamp(
+        0,
+        14,
+      ); // 360 = 6 AM in minutes
+      return {
+        'muhurtaIndex': dayMuhurtaIndex + 1,
+        'muhurtaName': getDayMuhurtaName(dayMuhurtaIndex + 1),
+        'isDay': true,
+        'period': 'Day',
+      };
+    } else {
+      // Night muhurtas (6 PM to 6 AM)
+      int nightMinutes = hour < 6
+          ? totalMinutes + 360
+          : totalMinutes - 1080; // Adjust for night calculation
+      int nightMuhurtaIndex = (nightMinutes / 48).floor().clamp(0, 14);
+      return {
+        'muhurtaIndex': nightMuhurtaIndex + 1,
+        'muhurtaName': getNightMuhurtaName(nightMuhurtaIndex + 1),
+        'isDay': false,
+        'period': 'Night',
+      };
+    }
+  }
+
   /// Calculate Hindu calendar data for a given Gregorian date
   static Map<String, dynamic> calculateHinduDate(
     int year,
@@ -136,6 +177,10 @@ class HinduCalculationEngine {
     // Approximate Hindu year calculation
     int hinduYear = year + 57; // Rough approximation
 
+    // Calculate current Muhurta
+    DateTime currentTime = DateTime(year, month, day, DateTime.now().hour, DateTime.now().minute);
+    Map<String, dynamic> muhurtaInfo = getMuhurta(currentTime);
+
     return {
       'gregorianYear': year,
       'gregorianMonth': month,
@@ -160,6 +205,10 @@ class HinduCalculationEngine {
       'sunLongitude': sunLong,
       'moonLongitude': moonLong,
       'tithiValue': tithiValue,
+      'muhurtaIndex': muhurtaInfo['muhurtaIndex'],
+      'muhurtaName': muhurtaInfo['muhurtaName'],
+      'muhurtaIsDay': muhurtaInfo['isDay'],
+      'muhurtaPeriod': muhurtaInfo['period'],
     };
   }
 
