@@ -103,152 +103,107 @@ class _HinduCalendarWidgetState extends State<HinduCalendarWidget> {
   Widget _buildCompactView() {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(12),
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            Colors.orange.shade50,
-            Colors.deepOrange.shade50,
-          ],
+          colors: [Colors.orange.shade50, Colors.deepOrange.shade50],
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.orange.withOpacity(0.2),
-            blurRadius: 8,
-            offset: const Offset(0, 4),
+            color: Colors.orange.withOpacity(0.15),
+            blurRadius: 4,
+            offset: const Offset(0, 2),
           ),
         ],
       ),
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Header with enhanced design
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              decoration: BoxDecoration(
-                color: Colors.deepOrange.shade600,
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.deepOrange.withOpacity(0.3),
-                    blurRadius: 4,
-                    offset: const Offset(0, 2),
+            // Compact header with main info
+            Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: Colors.deepOrange.shade600,
+                    borderRadius: BorderRadius.circular(12),
                   ),
-                ],
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(
-                    Icons.auto_awesome,
-                    color: Colors.white,
-                    size: widget.fontSize,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.auto_awesome, color: Colors.white, size: widget.fontSize - 2),
+                      const SizedBox(width: 4),
+                      Text(
+                        'Hindu',
+                        style: TextStyle(
+                          fontSize: widget.fontSize - 2,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(width: 8),
-                  Text(
-                    'Hindu Panchanga',
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    '${pancangaDate.tithiName} • ${pancangaDate.paksha}',
                     style: TextStyle(
                       fontSize: widget.fontSize,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 12),
-            
-            // Main tithi display
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Colors.deepOrange.shade200),
-              ),
-              child: Column(
-                children: [
-                  Text(
-                    '${pancangaDate.tithiName}',
-                    style: TextStyle(
-                      fontSize: widget.fontSize + 2,
-                      fontWeight: FontWeight.bold,
                       color: Colors.deepOrange.shade700,
                     ),
-                    textAlign: TextAlign.center,
                   ),
-                  Text(
-                    pancangaDate.paksha,
-                    style: TextStyle(
-                      fontSize: widget.fontSize - 1,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.deepOrange.shade600,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 6),
+
+            // Essential Panchanga in single row
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  _buildInfoChip('⭐ ${pancangaDate.nakshatraName}', Colors.purple),
+                  const SizedBox(width: 4),
+                  _buildInfoChip('🧘 ${pancangaDate.yogaName}', Colors.blue),
+                  const SizedBox(width: 4),
+                  _buildInfoChip('📅 ${pancangaDate.varaName}', Colors.green),
+                  const SizedBox(width: 4),
+                  _buildInfoChip('🌙 ${pancangaDate.lunarMonth}', Colors.indigo),
+                  const SizedBox(width: 4),
+                  _buildInfoChip('${pancangaDate.hinduYear}', Colors.orange),
                 ],
               ),
             ),
-            const SizedBox(height: 8),
-            
-            // Panchanga details in chips
-            Wrap(
-              spacing: 6,
-              runSpacing: 6,
-              children: [
-                _buildInfoChip('⭐ ${pancangaDate.nakshatraName}', Colors.purple),
-                _buildInfoChip('🧘 ${pancangaDate.yogaName}', Colors.blue),
-                _buildInfoChip('📅 ${pancangaDate.varaName}', Colors.green),
-              ],
-            ),
-            const SizedBox(height: 8),
-            
-            // Date info
-            Row(
-              children: [
-                Expanded(
-                  child: _buildInfoChip('🌙 ${pancangaDate.lunarMonth}', Colors.indigo),
-                ),
-                const SizedBox(width: 6),
-                _buildInfoChip('${pancangaDate.hinduYear}', Colors.orange),
-              ],
-            ),
-            
-            // Muhurta info
+
+            // Muhurta info - only if present and very compact
             if (pancangaDate.muhurtaName.isNotEmpty) ...[
-              const SizedBox(height: 8),
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                decoration: BoxDecoration(
-                  color: Colors.amber.shade100,
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: Colors.amber.shade300),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      pancangaDate.muhurtaIsDay ? Icons.wb_sunny : Icons.nights_stay,
-                      size: widget.fontSize - 2,
-                      color: Colors.amber.shade700,
-                    ),
-                    const SizedBox(width: 6),
-                    Text(
+              const SizedBox(height: 4),
+              Row(
+                children: [
+                  Icon(
+                    pancangaDate.muhurtaIsDay ? Icons.wb_sunny : Icons.nights_stay,
+                    size: widget.fontSize - 2,
+                    color: Colors.amber.shade700,
+                  ),
+                  const SizedBox(width: 4),
+                  Expanded(
+                    child: Text(
                       'Muhurta: ${pancangaDate.muhurtaName}',
                       style: TextStyle(
-                        fontSize: widget.fontSize - 2,
-                        fontWeight: FontWeight.w600,
+                        fontSize: widget.fontSize - 3,
+                        fontWeight: FontWeight.w500,
                         color: Colors.amber.shade800,
                       ),
+                      overflow: TextOverflow.ellipsis,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ],
           ],
@@ -259,16 +214,16 @@ class _HinduCalendarWidgetState extends State<HinduCalendarWidget> {
 
   Widget _buildInfoChip(String text, MaterialColor color) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
       decoration: BoxDecoration(
         color: color.shade50,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: color.shade200),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: color.shade200, width: 0.5),
       ),
       child: Text(
         text,
         style: TextStyle(
-          fontSize: widget.fontSize - 3,
+          fontSize: widget.fontSize - 4,
           fontWeight: FontWeight.w500,
           color: color.shade700,
         ),
@@ -283,11 +238,7 @@ class _HinduCalendarWidgetState extends State<HinduCalendarWidget> {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            Colors.orange.shade50,
-            Colors.deepOrange.shade50,
-            Colors.red.shade50,
-          ],
+          colors: [Colors.orange.shade50, Colors.deepOrange.shade50, Colors.red.shade50],
         ),
         boxShadow: [
           BoxShadow(
@@ -320,9 +271,7 @@ class _HinduCalendarWidgetState extends State<HinduCalendarWidget> {
       width: double.infinity,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Colors.deepOrange.shade600, Colors.orange.shade500],
-        ),
+        gradient: LinearGradient(colors: [Colors.deepOrange.shade600, Colors.orange.shade500]),
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
@@ -340,11 +289,7 @@ class _HinduCalendarWidgetState extends State<HinduCalendarWidget> {
               color: Colors.white.withOpacity(0.2),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Icon(
-              Icons.auto_awesome,
-              color: Colors.white,
-              size: widget.fontSize + 2,
-            ),
+            child: Icon(Icons.auto_awesome, color: Colors.white, size: widget.fontSize + 2),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -376,11 +321,7 @@ class _HinduCalendarWidgetState extends State<HinduCalendarWidget> {
               color: Colors.white.withOpacity(0.2),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Icon(
-              Icons.star_border,
-              color: Colors.white,
-              size: widget.fontSize,
-            ),
+            child: Icon(Icons.star_border, color: Colors.white, size: widget.fontSize),
           ),
         ],
       ),

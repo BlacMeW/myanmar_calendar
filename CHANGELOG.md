@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.3.0] - 2025-06-27
+
+### Added
+- Added "နေ့" suffix to all Myanmar weekday translations for proper display
+- Optimized compact mode for both Hindu calendar widgets for better space utilization
+- Improved scrollable layout for compact mode to display more information in less space
+
+### Fixed
+- Fixed weekday translation issue where English names weren't being translated correctly
+- Fixed translation of "Friday" to properly show as "သောကြာနေ့" instead of just showing English text 
+
 ## [0.2.0] - 2025-06-27
 
 ### Added

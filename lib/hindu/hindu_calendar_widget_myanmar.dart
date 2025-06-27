@@ -113,200 +113,137 @@ class _HinduCalendarWidgetMyanmarState extends State<HinduCalendarWidgetMyanmar>
   Widget _buildCompactView() {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(12),
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            Colors.deepPurple.shade50,
-            Colors.purple.shade50,
-            Colors.indigo.shade50,
-          ],
+          colors: [Colors.deepPurple.shade50, Colors.purple.shade50, Colors.indigo.shade50],
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.deepPurple.withOpacity(0.2),
-            blurRadius: 8,
-            offset: const Offset(0, 4),
+            color: Colors.deepPurple.withOpacity(0.15),
+            blurRadius: 4,
+            offset: const Offset(0, 2),
           ),
         ],
       ),
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Enhanced header with Myanmar styling
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Colors.deepPurple.shade600, Colors.purple.shade500],
+            // Compact header with main Myanmar info
+            Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Colors.deepPurple.shade600, Colors.purple.shade500],
+                    ),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.auto_awesome, color: Colors.white, size: widget.fontSize - 2),
+                      const SizedBox(width: 4),
+                      Text(
+                        'ဟိန္ဒူ',
+                        style: TextStyle(
+                          fontSize: widget.fontSize - 2,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.deepPurple.withOpacity(0.3),
-                    blurRadius: 4,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(
-                    Icons.auto_awesome,
-                    color: Colors.white,
-                    size: widget.fontSize,
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    'ဟိန္ဒူ ပြက္ခဒိန်', // Hindu Calendar
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    '${_getMyanmarTithiName(pancangaDate.tithiName)} • ${_getMyanmarPaksha(pancangaDate.paksha)}',
                     style: TextStyle(
                       fontSize: widget.fontSize,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 12),
-            
-            // Main tithi display with Myanmar styling
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Colors.deepPurple.shade200),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.deepPurple.withOpacity(0.1),
-                    blurRadius: 4,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  Text(
-                    _getMyanmarTithiName(pancangaDate.tithiName),
-                    style: TextStyle(
-                      fontSize: widget.fontSize + 2,
-                      fontWeight: FontWeight.bold,
                       color: Colors.deepPurple.shade700,
                     ),
-                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  Text(
-                    _getMyanmarPaksha(pancangaDate.paksha),
-                    style: TextStyle(
-                      fontSize: widget.fontSize - 1,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.deepPurple.shade600,
-                    ),
-                    textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+            const SizedBox(height: 6),
+
+            // Essential Panchanga in Myanmar - single scrollable row
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  _buildMyanmarInfoChip(
+                    '⭐ ${_getMyanmarNakshatra(pancangaDate.nakshatraName)}',
+                    Colors.purple,
+                  ),
+                  const SizedBox(width: 4),
+                  _buildMyanmarInfoChip(
+                    '🧘 ${_getMyanmarYoga(pancangaDate.yogaName)}',
+                    Colors.blue,
+                  ),
+                  const SizedBox(width: 4),
+                  _buildMyanmarInfoChip(
+                    '📅 ${_getMyanmarVara(pancangaDate.varaName)}',
+                    Colors.green,
+                  ),
+                  const SizedBox(width: 4),
+                  _buildMyanmarInfoChip(
+                    '🌙 ${_getMyanmarMonth(pancangaDate.lunarMonth)}',
+                    Colors.indigo,
+                  ),
+                  const SizedBox(width: 4),
+                  _buildMyanmarInfoChip(
+                    _convertToMyanmarNumerals(pancangaDate.hinduYear),
+                    Colors.orange,
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: 8),
-            
-            // Panchanga details in Myanmar chips
-            Wrap(
-              spacing: 6,
-              runSpacing: 6,
-              children: [
-                _buildMyanmarInfoChip('⭐ ${_getMyanmarNakshatra(pancangaDate.nakshatraName)}', Colors.purple),
-                _buildMyanmarInfoChip('🧘 ${_getMyanmarYoga(pancangaDate.yogaName)}', Colors.blue),
-                _buildMyanmarInfoChip('📅 ${_getMyanmarVara(pancangaDate.varaName)}', Colors.green),
-              ],
-            ),
-            const SizedBox(height: 8),
-            
-            // Date info with Myanmar styling
-            Row(
-              children: [
-                Expanded(
-                  child: _buildMyanmarInfoChip('🌙 ${_getMyanmarMonth(pancangaDate.lunarMonth)}', Colors.indigo),
-                ),
-                const SizedBox(width: 6),
-                _buildMyanmarInfoChip('${_convertToMyanmarNumerals(pancangaDate.hinduYear)}', Colors.orange),
-              ],
-            ),
-            const SizedBox(height: 8),
-            
-            // Samvatsara info
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-              decoration: BoxDecoration(
-                color: Colors.deepPurple.shade50,
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: Colors.deepPurple.shade200),
+
+            // Samvatsara - very compact
+            const SizedBox(height: 4),
+            Text(
+              'သံဝစ္စရ: ${_getMyanmarSamvatsara(pancangaDate.hinduYear)}',
+              style: TextStyle(
+                fontSize: widget.fontSize - 3,
+                fontWeight: FontWeight.w500,
+                color: Colors.deepPurple.shade600,
               ),
-              child: Text(
-                'သံဝစ္စရ: ${_getMyanmarSamvatsara(pancangaDate.hinduYear)}',
-                style: TextStyle(
-                  fontSize: widget.fontSize - 2,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.deepPurple.shade700,
-                ),
-                textAlign: TextAlign.center,
-              ),
+              overflow: TextOverflow.ellipsis,
             ),
-            
-            // Muhurta info with Myanmar styling
+
+            // Muhurta info - Myanmar compact
             if (pancangaDate.muhurtaName.isNotEmpty) ...[
-              const SizedBox(height: 8),
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Colors.amber.shade100, Colors.orange.shade100],
+              const SizedBox(height: 4),
+              Row(
+                children: [
+                  Icon(
+                    pancangaDate.muhurtaIsDay ? Icons.wb_sunny : Icons.nights_stay,
+                    size: widget.fontSize - 2,
+                    color: Colors.amber.shade700,
                   ),
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: Colors.amber.shade300),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      pancangaDate.muhurtaIsDay ? Icons.wb_sunny : Icons.nights_stay,
-                      size: widget.fontSize,
-                      color: Colors.amber.shade700,
-                    ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            'မုဟုတ်တ: ${_getMyanmarMuhurta(pancangaDate.muhurtaName, pancangaDate.muhurtaIsDay)}',
-                            style: TextStyle(
-                              fontSize: widget.fontSize - 1,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.amber.shade800,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                          Text(
-                            pancangaDate.muhurtaIsDay ? 'နေ့ချိန်' : 'ညချိန်',
-                            style: TextStyle(
-                              fontSize: widget.fontSize - 3,
-                              color: Colors.amber.shade700,
-                            ),
-                          ),
-                        ],
+                  const SizedBox(width: 4),
+                  Expanded(
+                    child: Text(
+                      'မုဟုတ်တ: ${_getMyanmarMuhurta(pancangaDate.muhurtaName, pancangaDate.muhurtaIsDay)}',
+                      style: TextStyle(
+                        fontSize: widget.fontSize - 3,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.amber.shade800,
                       ),
+                      overflow: TextOverflow.ellipsis,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ],
           ],
@@ -317,25 +254,19 @@ class _HinduCalendarWidgetMyanmarState extends State<HinduCalendarWidgetMyanmar>
 
   Widget _buildMyanmarInfoChip(String text, MaterialColor color) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [color.shade50, color.shade100],
-        ),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: color.shade200),
+        gradient: LinearGradient(colors: [color.shade50, color.shade100]),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: color.shade200, width: 0.5),
         boxShadow: [
-          BoxShadow(
-            color: color.withOpacity(0.1),
-            blurRadius: 2,
-            offset: const Offset(0, 1),
-          ),
+          BoxShadow(color: color.withOpacity(0.1), blurRadius: 1, offset: const Offset(0, 1)),
         ],
       ),
       child: Text(
         text,
         style: TextStyle(
-          fontSize: widget.fontSize - 3,
+          fontSize: widget.fontSize - 4,
           fontWeight: FontWeight.w600,
           color: color.shade700,
         ),
@@ -408,11 +339,7 @@ class _HinduCalendarWidgetMyanmarState extends State<HinduCalendarWidgetMyanmar>
               color: Colors.white.withOpacity(0.2),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Icon(
-              Icons.auto_awesome,
-              color: Colors.white,
-              size: widget.fontSize + 2,
-            ),
+            child: Icon(Icons.auto_awesome, color: Colors.white, size: widget.fontSize + 2),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -446,11 +373,7 @@ class _HinduCalendarWidgetMyanmarState extends State<HinduCalendarWidgetMyanmar>
             ),
             child: Column(
               children: [
-                Icon(
-                  Icons.star_border,
-                  color: Colors.white,
-                  size: widget.fontSize,
-                ),
+                Icon(Icons.star_border, color: Colors.white, size: widget.fontSize),
                 Text(
                   'မြန်မာ',
                   style: TextStyle(
@@ -474,10 +397,7 @@ class _HinduCalendarWidgetMyanmarState extends State<HinduCalendarWidgetMyanmar>
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [
-            Colors.white,
-            Colors.deepPurple.shade50,
-          ],
+          colors: [Colors.white, Colors.deepPurple.shade50],
         ),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: Colors.deepPurple.shade200, width: 2),
@@ -528,7 +448,7 @@ class _HinduCalendarWidgetMyanmarState extends State<HinduCalendarWidgetMyanmar>
               ),
             ),
             const SizedBox(height: 12),
-            
+
             // Month and Year info
             Row(
               children: [
@@ -542,7 +462,11 @@ class _HinduCalendarWidgetMyanmarState extends State<HinduCalendarWidgetMyanmar>
                     ),
                     child: Column(
                       children: [
-                        Icon(Icons.calendar_month, color: Colors.indigo.shade600, size: widget.fontSize),
+                        Icon(
+                          Icons.calendar_month,
+                          color: Colors.indigo.shade600,
+                          size: widget.fontSize,
+                        ),
                         const SizedBox(height: 4),
                         Text(
                           _getMyanmarMonth(pancangaDate.lunarMonth),
@@ -585,7 +509,7 @@ class _HinduCalendarWidgetMyanmarState extends State<HinduCalendarWidgetMyanmar>
               ],
             ),
             const SizedBox(height: 12),
-            
+
             // Samvatsara with special styling
             Container(
               width: double.infinity,
@@ -626,20 +550,14 @@ class _HinduCalendarWidgetMyanmarState extends State<HinduCalendarWidgetMyanmar>
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Colors.blue.shade100, Colors.lightBlue.shade100],
-                ),
+                gradient: LinearGradient(colors: [Colors.blue.shade100, Colors.lightBlue.shade100]),
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(color: Colors.blue.shade300),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(
-                    Icons.today,
-                    color: Colors.blue.shade700,
-                    size: widget.fontSize,
-                  ),
+                  Icon(Icons.today, color: Colors.blue.shade700, size: widget.fontSize),
                   const SizedBox(width: 8),
                   Text(
                     'ဂရီဂေါရီယန်: ${_convertToMyanmarNumerals(widget.day)}/${_convertToMyanmarNumerals(widget.month)}/${_convertToMyanmarNumerals(widget.year)}',
@@ -658,9 +576,24 @@ class _HinduCalendarWidgetMyanmarState extends State<HinduCalendarWidgetMyanmar>
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                _buildQuickInfo('နက္ခတ်', _getMyanmarNakshatra(pancangaDate.nakshatraName), Icons.star, Colors.purple),
-                _buildQuickInfo('ယောဂ', _getMyanmarYoga(pancangaDate.yogaName), Icons.self_improvement, Colors.blue),
-                _buildQuickInfo('ကရဏ', _getMyanmarKarana(pancangaDate.karanaName), Icons.timeline, Colors.green),
+                _buildQuickInfo(
+                  'နက္ခတ်',
+                  _getMyanmarNakshatra(pancangaDate.nakshatraName),
+                  Icons.star,
+                  Colors.purple,
+                ),
+                _buildQuickInfo(
+                  'ယောဂ',
+                  _getMyanmarYoga(pancangaDate.yogaName),
+                  Icons.self_improvement,
+                  Colors.blue,
+                ),
+                _buildQuickInfo(
+                  'ကရဏ',
+                  _getMyanmarKarana(pancangaDate.karanaName),
+                  Icons.timeline,
+                  Colors.green,
+                ),
               ],
             ),
           ],
@@ -673,27 +606,17 @@ class _HinduCalendarWidgetMyanmarState extends State<HinduCalendarWidgetMyanmar>
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [color.shade50, color.shade100],
-        ),
+        gradient: LinearGradient(colors: [color.shade50, color.shade100]),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: color.shade200),
         boxShadow: [
-          BoxShadow(
-            color: color.withOpacity(0.2),
-            blurRadius: 4,
-            offset: const Offset(0, 2),
-          ),
+          BoxShadow(color: color.withOpacity(0.2), blurRadius: 4, offset: const Offset(0, 2)),
         ],
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(
-            icon,
-            color: color.shade600,
-            size: widget.fontSize + 2,
-          ),
+          Icon(icon, color: color.shade600, size: widget.fontSize + 2),
           const SizedBox(height: 4),
           Text(
             label,
@@ -759,7 +682,7 @@ class _HinduCalendarWidgetMyanmarState extends State<HinduCalendarWidgetMyanmar>
                 '${_getMyanmarKarana(pancangaDate.karanaName)} (${_convertToMyanmarNumerals(pancangaDate.karanaNumber)})',
               ),
               _buildDetailRow(
-                '၆။ မုဟုတ်တ',
+                '၆။ မုဟုတ္တ',
                 '${_getMyanmarMuhurta(pancangaDate.muhurtaName, pancangaDate.muhurtaIsDay)} (${_convertToMyanmarNumerals(pancangaDate.muhurtaIndex)}) - ${pancangaDate.muhurtaIsDay ? 'နေ့ချိန်' : 'ညချိန်'}',
               ),
             ],
@@ -1122,13 +1045,23 @@ class _HinduCalendarWidgetMyanmarState extends State<HinduCalendarWidgetMyanmar>
 
   String _getMyanmarVara(String vara) {
     const Map<String, String> varaTranslations = {
-      'Ravivar': 'တနင်္ဂနွေ',
-      'Somvar': 'တနင်္လာ',
-      'Mangalvar': 'အင်္ဂါ',
-      'Budhvar': 'ဗုဒ္ဓဟူး',
-      'Guravar': 'ကြာသပတေး',
-      'Shukravar': 'သောကြာ',
-      'Shanivar': 'စနေ',
+      // Sanskrit/Hindi names
+      'Ravivar': 'တနင်္ဂနွေနေ့',
+      'Somvar': 'တနင်္လာနေ့',
+      'Mangalvar': 'အင်္ဂါနေ့',
+      'Budhvar': 'ဗုဒ္ဓဟူးနေ့',
+      'Guravar': 'ကြာသပတေးနေ့',
+      'Shukravar': 'သောကြာနေ့',
+      'Shanivar': 'စနေနေ့',
+
+      // English names (from getWeekdayName function)
+      'Sunday': 'တနင်္ဂနွေနေ့',
+      'Monday': 'တနင်္လာနေ့',
+      'Tuesday': 'အင်္ဂါနေ့',
+      'Wednesday': 'ဗုဒ္ဓဟူးနေ့',
+      'Thursday': 'ကြာသပတေးနေ့',
+      'Friday': 'သောကြာနေ့',
+      'Saturday': 'စနေနေ့',
     };
     return varaTranslations[vara] ?? vara;
   }
